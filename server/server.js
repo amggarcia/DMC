@@ -1,4 +1,4 @@
-import GeneralActivity from './server/models/generalActivity';
+import GeneralActivity from './models/generalActivity';
 import mongoose from 'mongoose';
 
 //After the address is the database name in this case .../DMC
