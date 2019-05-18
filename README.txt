@@ -9,3 +9,8 @@ The build part for the backend portion might be missing
 https://medium.com/@kimtnguyen/how-to-deploy-es6-node-js-express-back-end-to-heroku-7e6743e8d2ff
 
 If the build part for the frontend is missing see youtube link
+
+Another good series
+https://www.youtube.com/watch?v=TIAfjBXsY2E
+
+Projection,authentication,pagination

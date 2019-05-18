@@ -1,5 +1,13 @@
+
 import GeneralActivity from './models/generalActivity';
 import mongoose from 'mongoose';
+import {ApolloServer, gql} from 'apollo-server-express';
+import express from 'express';
+
+import typeDefs from './typeDefs';
+
+import resolvers from './resolvers';
+
 
 //After the address is the database name in this case .../DMC
 const mongoConAdmin = 'mongodb+srv://admin:hcENHLOjZBM8GZ1a@cluster0-06naj.mongodb.net/DMC?retryWrites=true';
@@ -13,9 +21,18 @@ db.once('open', function(){
     console.log("Connection established");
 })
 
-const activity = new models.GeneralActivity({
-    name : 'testActivity1',
-    description : 'wonderful activity1',
+const app = express();
+
+const server = new ApolloServer({
+    typeDefs:typeDefs,
+    resolvers:resolvers,
+    context: {models: models}
 });
 
-activity.save();
+server.applyMiddleware({app});
+
+app.listen({port : 4000} , () =>
+{
+    console.log('Apollo server listening on 4000');
+});
+
