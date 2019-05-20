@@ -8,6 +8,7 @@ import SideBar from './SideBar';
 
 class MenuBar extends React.Component
 {
+  
   state = {anchorEl : null, drawerOpen : false}; 
   handleMenu = event => {
     this.setState({anchorEl : event.currentTarget});
@@ -23,12 +24,12 @@ class MenuBar extends React.Component
     render()
     {
     const {anchorEl , drawerOpen}  = this.state;
-      console.log(drawerOpen);
+      
       const open = Boolean(anchorEl);
     
         return( 
             <div >
-            <AppBar>
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton onClick={this.toggleDrawer(!drawerOpen)} color="inherit">
                         <MenuIcon/>
