@@ -1,13 +1,13 @@
-import React , { Component} from 'react';
-import {List, ListItemText,ListItem,ListItemIcon, Divider} from '@material-ui/core';
+import React, { Component } from 'react';
+import { List, ListItemText, ListItem, ListItemIcon, Divider } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-class SideBar extends Component{
+class SideBar extends Component {
 
-    render(){
-        return (
-            <div style={{width: 250}} >
+  render() {
+    return (
+      <div style={{ width: 250 }} >
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
@@ -25,9 +25,9 @@ class SideBar extends Component{
             </ListItem>
           ))}
         </List>
-         </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default SideBar

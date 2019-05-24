@@ -14,3 +14,7 @@ Another good series
 https://www.youtube.com/watch?v=TIAfjBXsY2E
 
 Projection,authentication,pagination
+
+Good blog with alot of posts on React/Apollo and much moore
+
+https://www.robinwieruch.de/react-apollo-link-state-tutorial/

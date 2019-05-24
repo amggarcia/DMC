@@ -1,20 +1,30 @@
-import React , { Component} from 'react';
+import React, { Component } from 'react';
 import TreeListSideBar from './TreeListSideBar';
 import ActivityViewer from './ActivityViewer';
-import { Grid} from '@material-ui/core';
+import ActivityEditor from './ActivityEditor';
+import { Grid, Toolbar, Button } from '@material-ui/core';
 
-class ActivityManager extends Component{
+class ActivityManager extends Component {
 
-    render(){
+    render() {
         return (
-        <Grid container>
-            <Grid item xs={2}>
-                <TreeListSideBar></TreeListSideBar>
+            <Grid container style={{ paddingTop: 64 }}>
+                <Grid item xs={2}>
+                    <TreeListSideBar></TreeListSideBar>
+                </Grid>
+                <Grid item xs={10}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Toolbar xs={10} style={{ float: "right", position: "static" }}>
+                                <Button variant="contained" style={{ marginRight: 10 }} color="primary">Add new</Button>
+                                <Button variant="contained" style={{ marginRight: 10 }} color="primary">Edit</Button>
+                                <Button variant="contained" style={{ marginRight: 10 }} color="secondary">Remove</Button>
+                            </Toolbar>
+                        </Grid>
+                        <ActivityEditor></ActivityEditor>
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid item xs={10}>
-                <ActivityViewer></ActivityViewer>
-            </Grid>
-        </Grid>
         );
     }
 }
