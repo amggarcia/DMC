@@ -9,7 +9,7 @@ class SideBar extends Component
 {
   constructor(props) {
     super(props);
-    const collections = ['Hotels','Restaurants','Team building', 'Theme partys', 'Other'];
+    const collections = ['Hotels','Restaurants','Team building', 'Theme parties', 'Other'];
     const expands = [];
     collections.forEach(text => {
       expands[text] = false;

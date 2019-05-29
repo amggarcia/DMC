@@ -1,6 +1,11 @@
-import GeneralActivity from './generalActivity';
-import {gql} from 'apollo-server-express';
-const root = gql `
+import Activity from './Activity';
+import ActivityDescription from './ActivityDescription';
+import ActivityType from './ActivityType';
+import ActivityPicture from './ActivityPicture';
+import ActivityLink from './ActivityLink';
+
+import { gql } from 'apollo-server-express';
+const root = gql`
     type Query{
         _: String
     }
@@ -14,4 +19,4 @@ const root = gql `
     }
 `;
 
-export default [root, GeneralActivity]
+export default [root, Activity, ActivityDescription, ActivityType, ActivityPicture, ActivityLink]

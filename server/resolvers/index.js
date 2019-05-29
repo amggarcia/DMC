@@ -1,3 +1,7 @@
-import GeneralActivity from './generalActivity';
+import Activity from './Activity';
+import ActivityDescription from './ActivityDescription';
+import ActivityType from './ActivityType';
+import ActivityPicture from './ActivityPicture';
+import ActivityLink from './ActivityLink';
 
-export default [GeneralActivity];
+export default [Activity, ActivityDescription, ActivityType, ActivityPicture, ActivityLink];
