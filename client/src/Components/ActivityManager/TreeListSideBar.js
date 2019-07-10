@@ -6,8 +6,8 @@ import AddIcon from '@material-ui/icons/Add';
 import StarBorder from '@material-ui/icons/StarBorder';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-
-const ACTIVITY_TYPES_QUERY = gql`query{activityTypes{id,type,activities{name}}}`;
+import { Link } from 'react-router-dom';
+const ACTIVITY_TYPES_QUERY = gql`query{activityTypes{id,type,activities{name,id}}}`;
 
 class SideBar extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class SideBar extends Component {
                       <Collapse in={this.state.expands[type.type]} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                           {type.activities.map((activity) => (
-                            <ListItem button >
+                            <ListItem component={Link} button onClick={this.props.changeActivity(activity.id)} to="/Viewer">
                               <ListItemIcon>
                                 <StarBorder />
                               </ListItemIcon>
@@ -58,7 +58,7 @@ class SideBar extends Component {
                       </Collapse>
                     </div>
                   ))}
-                <ListItem button key="AddNew" onClick={console.log("To be implemented")}>
+                <ListItem button key="AddNew" onClick={() => console.log("To be implemented")}>
                   <ListItemIcon><AddIcon /></ListItemIcon>
                   <ListItemText primary="Add new category" />
                 </ListItem>

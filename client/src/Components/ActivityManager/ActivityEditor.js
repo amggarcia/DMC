@@ -4,14 +4,19 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteBorderIcon from '@material-ui/icons/DeleteOutline';
 import DeleteIcon from '@material-ui/icons/Delete';
 class ActivityEditor extends Component {
-    state = {
-        name: 'New name',
-        pictures: ['https://loremflickr.com/320/240?random=', 'https://loremflickr.com/320/240?random='],
-        description: 'long description incoming',
-        location: 'somewhere',
-        capacity: '100',
-        links: [{ description: 'tripadvisor', address: 'https://tripadvisor.com' }, { description: 'zoomato', address: 'https://zoomato.com' }]
-    };
+    constructor(props) {
+        super(props);
+        var receiveActivity = props.activity;
+        this.state = {
+            name: receiveActivity ? props.activity.name : "",
+            pictures: receiveActivity ? props.activity.pictures : [],
+            description: receiveActivity ? props.activity.descriptions : [],
+            location: receiveActivity ? props.activity.location : "",
+            capacity: receiveActivity ? props.activity.capacity : "",
+            links: receiveActivity ? props.activity.links : []
+        };
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -45,7 +50,6 @@ class ActivityEditor extends Component {
                         variant="filled"
                         fullWidth
                     />
-                    <Typography component="h1" variant="display2" style={{ marginTop: 20, marginBottom: 20 }}>Activity Name</Typography>
                     <GridList cols={2.5} cellHeight={240} style={{ flexWrap: "nowrap", marginRight: 10 }}>
                         {this.state.pictures.map((element, index) => (
                             <GridListTile key={"image" + index}>
