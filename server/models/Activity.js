@@ -5,9 +5,8 @@ const ActivitySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: [{ type: Schema.Types.ObjectId, ref: 'ActivityDescription' }],
-    activityType: { type: Schema.Types.ObjectId, ref: 'ActivityType' },
-    //TODO set the sc..hemaType
+    descriptions: [{ type: Schema.Types.ObjectId, ref: 'ActivityDescription' }],
+    type: { type: Schema.Types.ObjectId, ref: 'ActivityType' },
     pictures: [{ type: Schema.Types.ObjectId, ref: 'ActivityPictures' }],
     location: { type: String },
     capacity: { type: String },

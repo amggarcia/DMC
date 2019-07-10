@@ -21,7 +21,7 @@ class ActivityManager extends Component {
                                 <Button variant="contained" style={{ marginRight: 10 }} color="secondary">Remove</Button>
                             </Toolbar>
                         </Grid>
-                        <ActivityEditor></ActivityEditor>
+                        <ActivityViewer></ActivityViewer>
                     </Grid>
                 </Grid>
             </Grid>

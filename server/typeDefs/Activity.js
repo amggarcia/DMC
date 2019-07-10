@@ -21,7 +21,7 @@ export default gql`
     type Activity{
         id:ID!
         name:String!
-        description: ActivityDescription
+        descriptions: [ActivityDescription]
         type: ActivityType!
         pictures:[ActivityPicture]
         location: String

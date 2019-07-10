@@ -20,6 +20,19 @@ export default {
             //TODO: Make sure only provided are set on the object
             return context.models.Activity.create(args)
         }
+    },
+    Activity: {
+        descriptions: async (link, args, context) => {
+            return context.models.ActivityDescription.find({ _id: { $in: link.descriptions } });
+        },
+        type: async (link, args, context) => {
+            return context.models.ActivityType.findById(link.type);
+        },
+        pictures: async (link, args, context) => {
+            return context.models.ActivityPicture.find({ _id: { $in: link.pictures } });
+        },
+        links: async (link, args, context) => {
+            return context.models.ActivityLink.find({ _id: { $in: link.links } });
+        }
     }
-    //TODO add methods to get the related objects thingamajigs
 }

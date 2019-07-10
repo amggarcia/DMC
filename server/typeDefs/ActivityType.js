@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
     extend type Query {
         activityType(id:ID) : ActivityType
+        activityTypes: [ActivityType]
     }
 
     extend type Mutation{
@@ -12,5 +13,6 @@ export default gql`
     type ActivityType{
         id:ID!
         type:String!
+        activities:[Activity]
     }
 `;

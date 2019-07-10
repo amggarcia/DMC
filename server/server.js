@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';
 import express from 'express';
+import cors from 'cors';
 
 import models from './models';
 
@@ -20,6 +21,8 @@ db.once('open', function () {
 })
 
 const app = express();
+
+app.use(cors());
 
 const server = new ApolloServer({
     typeDefs: typeDefs,
