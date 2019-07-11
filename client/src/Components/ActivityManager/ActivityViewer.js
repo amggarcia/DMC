@@ -13,6 +13,7 @@ const GET_ACTIVITY = gql`
     capacity
     descriptions {
       description
+      language
     }
     type{type}
     pictures{picture,isStarred}
@@ -58,7 +59,7 @@ class ActivityViewer extends Component {
                                             <GridListTile key={"image" + index}>
                                                 <img src={picture.picture} />
                                                 <GridListTileBar
-                                                    title="Picture Title"
+                                                    title={data.activity.name + " " + index}
                                                     actionIcon={
                                                         <IconButton>
                                                             <StarBorderIcon />
@@ -68,7 +69,7 @@ class ActivityViewer extends Component {
                                         ))};
                                 </GridList>
                                     <br />
-                                    <Typography variant="body1" gutterBottom >{data.activity.descriptions.find(description => description.language == "en-GB")}
+                                    <Typography variant="body1" gutterBottom >{data.activity.descriptions.find(description => description.language == "en-GB").description}
                                     </Typography>
                                     <br />
                                     <Typography variant="body1" gutterBottom > <b>Location : </b> {data.activity.location} <b>Capacity : </b> {data.activity.capacity}

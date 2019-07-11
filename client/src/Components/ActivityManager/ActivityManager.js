@@ -30,8 +30,8 @@ class ActivityManager extends Component {
                         <Grid container>
                             <Grid item xs={12}>
                                 <Toolbar xs={10} style={{ float: "right", position: "static" }}>
-                                    <Button component={Link} variant="contained" style={{ marginRight: 10 }} color="primary" to="/Edit">Add new</Button>
-                                    <Button variant="contained" style={{ marginRight: 10 }} color="primary">Edit</Button>
+                                    <Button component={Link} variant="contained" style={{ marginRight: 10 }} color="primary" to="/Edit" onClick={this.changeActivity(undefined)}>Add new</Button>
+                                    <Button component={Link} variant="contained" style={{ marginRight: 10 }} color="primary" to="/Edit">Edit</Button>
                                     <Button variant="contained" style={{ marginRight: 10 }} color="secondary">Remove</Button>
                                 </Toolbar>
                             </Grid>

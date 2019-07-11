@@ -3,6 +3,27 @@ import { GridList, GridListTile, GridListTileBar, IconButton, Typography, List, 
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteBorderIcon from '@material-ui/icons/DeleteOutline';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
+const GET_ACTIVITY = gql`
+  query activity($id: ID!) {
+    activity(id: $id) {
+    id
+    name
+    location
+    capacity
+    descriptions {
+      description
+      language 
+    }
+    type{type}
+    pictures{picture,isStarred}
+    links{description,link}
+  }
+  }
+`;
+
 class ActivityEditor extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +31,8 @@ class ActivityEditor extends Component {
         this.state = {
             name: receiveActivity ? props.activity.name : "",
             pictures: receiveActivity ? props.activity.pictures : [],
-            description: receiveActivity ? props.activity.descriptions : [],
+            description: receiveActivity && props.activity.descriptions.find(description => description.language == "en-GB")
+                ? props.activity.descriptions.find(description => description.language == "en-GB").description : "",
             location: receiveActivity ? props.activity.location : "",
             capacity: receiveActivity ? props.activity.capacity : "",
             links: receiveActivity ? props.activity.links : []
@@ -53,9 +75,9 @@ class ActivityEditor extends Component {
                     <GridList cols={2.5} cellHeight={240} style={{ flexWrap: "nowrap", marginRight: 10 }}>
                         {this.state.pictures.map((element, index) => (
                             <GridListTile key={"image" + index}>
-                                <img src={element + index} />
+                                <img src={element.picture} />
                                 <GridListTileBar
-                                    title={"Random Image " + index}
+                                    title={this.state.name + " " + index}
                                     actionIcon={<span><IconButton><DeleteBorderIcon /></IconButton><IconButton><StarBorderIcon /></IconButton></span>}
                                 />
                             </GridListTile>
@@ -116,7 +138,7 @@ class ActivityEditor extends Component {
                             <TextField xs={9}
                                 id={"linkAddress_" + index}
                                 label="Link address"
-                                value={element.address}
+                                value={element.link}
                                 onChange={this.handleLinkChange('address', index)}
                                 variant="filled"
                                 margin="normal"
@@ -129,4 +151,33 @@ class ActivityEditor extends Component {
     }
 }
 
-export default ActivityEditor
+class ActivityEditorWrapper extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activityId: this.props.activityId
+        }
+    }
+
+    render() {
+        if (!this.props.activityId)
+            return (<ActivityEditor></ActivityEditor>);
+        else {
+            return (
+                <Query query={GET_ACTIVITY} variables={{ id: this.state.activityId }}>
+                    {
+                        ({ loading, error, data }) => {
+                            if (loading) return "Loading ...";
+                            if (error) return `Error! ${error}`;
+                            return (
+                                <ActivityEditor activity={data.activity}></ActivityEditor>
+                            );
+                        }
+                    }
+                </Query>
+            );
+        }
+
+    }
+}
+export default ActivityEditorWrapper
