@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GridList, GridListTile, GridListTileBar, IconButton, Typography, List, ListItemText, ListItem, TextField, Grid, Toolbar, Button } from '@material-ui/core';
+import { GridList, GridListTile, GridListTileBar, IconButton, Typography, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItemText, ListItem, TextField, Grid, Toolbar, Button } from '@material-ui/core';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteBorderIcon from '@material-ui/icons/DeleteOutline';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -35,7 +35,9 @@ class ActivityEditor extends Component {
                 ? props.activity.descriptions.find(description => description.language == "en-GB").description : "",
             location: receiveActivity ? props.activity.location : "",
             capacity: receiveActivity ? props.activity.capacity : "",
-            links: receiveActivity ? props.activity.links : []
+            links: receiveActivity ? props.activity.links : [],
+            isUploadModalOpen: false,
+            uploadImageAddress: ""
         };
     }
 
@@ -59,6 +61,18 @@ class ActivityEditor extends Component {
         currentLinks.push({ description: '', address: '' });
         this.setState({ links: currentLinks });
     }
+    handleModalOpen = () => event => {
+        this.setState({ isUploadModalOpen: true });
+        console.log(this.state.isUploadModalOpen);
+    }
+    handleModalClose = (saveImage) => event => {
+        const currentImages = this.state.pictures;
+        if (saveImage && this.state.uploadImageAddress !== "") {
+            //Not sure if if __typename should be hardcoded for newly added images, keeping it here for now
+            currentImages.push({ picture: this.state.uploadImageAddress, isStarred: false, __typename: "ActivityPicture" });
+        }
+        this.setState({ isUploadModalOpen: false, uploadImageAddress: "", pictures: currentImages });
+    }
     render() {
         return (
             <Grid item xs={12} style={{ marginLeft: 10, marginRight: 10 }}>
@@ -75,7 +89,7 @@ class ActivityEditor extends Component {
                     <GridList cols={2.5} cellHeight={240} style={{ flexWrap: "nowrap", marginRight: 10 }}>
                         {this.state.pictures.map((element, index) => (
                             <GridListTile key={"image" + index}>
-                                <img src={element.picture} />
+                                <img src={element.picture} key={element.picture} />
                                 <GridListTileBar
                                     title={this.state.name + " " + index}
                                     actionIcon={<span><IconButton><DeleteBorderIcon /></IconButton><IconButton><StarBorderIcon /></IconButton></span>}
@@ -86,7 +100,7 @@ class ActivityEditor extends Component {
                     <Grid container>
                         <Grid item xs={12}>
                             <Toolbar style={{ float: "right" }}>
-                                <Button variant="contained" style={{ marginRight: 10 }} color="primary">Upload images</Button>
+                                <Button variant="contained" style={{ marginRight: 10 }} color="primary" onClick={this.handleModalOpen()}>Upload images</Button>
                             </Toolbar>
                         </Grid>
                     </Grid>
@@ -145,8 +159,27 @@ class ActivityEditor extends Component {
                             />
                         </Grid>
                     ))}
+                    <Dialog open={this.state.isUploadModalOpen} fullWidth={true} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Upload Image</DialogTitle>
+                        <DialogContent>
+
+                            <TextField
+                                id="uploadImageLink"
+                                label="Image address"
+                                value={this.state.uploadImageAddress}
+                                onChange={this.handleChange('uploadImageAddress')}
+                                margin="normal"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleModalClose(false)} color="primary">Cancel</Button>
+                            <Button onClick={this.handleModalClose(true)} color="primary">Upload</Button>
+                        </DialogActions>
+                    </Dialog>
                 </form>
-            </Grid>
+            </Grid >
         );
     }
 }

@@ -23,16 +23,16 @@ export default {
     },
     Activity: {
         descriptions: async (link, args, context) => {
-            return context.models.ActivityDescription.find({ _id: { $in: link.descriptions } });
+            return context.models.ActivityDescription.find({ activity: link.id });
         },
         type: async (link, args, context) => {
             return context.models.ActivityType.findById(link.type);
         },
         pictures: async (link, args, context) => {
-            return context.models.ActivityPicture.find({ _id: { $in: link.pictures } });
+            return context.models.ActivityPicture.find({ activity: link.id });
         },
         links: async (link, args, context) => {
-            return context.models.ActivityLink.find({ _id: { $in: link.links } });
+            return context.models.ActivityLink.find({ activity: link.id });
         }
     }
 }

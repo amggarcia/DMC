@@ -33,7 +33,6 @@ class ActivityViewer extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.activityId != prevProps.activityId) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
         {
-            console.log(this.props.activityId)
             this.updateActivity(this.props.activityId);
         }
     };
@@ -78,7 +77,7 @@ class ActivityViewer extends Component {
                                     <Typography variant="body1" gutterBottom><b>Aditional links</b> </Typography>
                                     <List component="nav">
                                         {data.activity.links.map((link, index) => (
-                                            <ListItem button component="a" href={link.link}>
+                                            <ListItem button component="a" href={link.link} target={'_blank'}>
                                                 <ListItemText primary={link.description} />
                                             </ListItem>
                                         ))};

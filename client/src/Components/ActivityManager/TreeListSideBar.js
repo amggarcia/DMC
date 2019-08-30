@@ -46,9 +46,6 @@ class SideBar extends Component {
                         <List component="div" disablePadding>
                           {type.activities.map((activity) => (
                             <ListItem component={Link} button onClick={this.props.changeActivity(activity.id)} to="/Viewer">
-                              <ListItemIcon>
-                                <StarBorder />
-                              </ListItemIcon>
                               <ListItemText inset primary={activity.name} />
                             </ListItem>
                           ))}
